@@ -24,6 +24,12 @@ public class MainActivity extends AppCompatActivity {
         app1 = (ImageButton) findViewById(R.id.app1);
         app2 = (ImageButton) findViewById(R.id.app2);
 
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            app1Rate.setText(extras.getString("APP1RATE"));
+            app2Rate.setText(extras.getString("APP2RATE"));
+        }
+
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
             app1Rate.setVisibility(View.GONE);
             app2Rate.setVisibility(View.GONE);
@@ -46,11 +52,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    protected void onResume(){
+    public void onResume(){
         super.onResume();
         Bundle b = getIntent().getExtras();
         //double result = b.getDouble("APP1RATE");
         //String test = getIntent().getDoubleExtra("APP1RATE");
         //app1Rate.setText(Double.toString(result));
     }
+
+    public void launchActivity(View view) {
+
+        Intent intent = new Intent(this, app1Activity.class);
+        startActivity(intent);
+    }
+
 }
